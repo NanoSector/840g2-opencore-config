@@ -8,9 +8,9 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>SSDT-EC-LAPTOP.aml</string>
+				<string>Fake EC device</string>
 				<key>Path</key>
-				<string>SSDT-EC-LAPTOP.aml</string>
+				<string>SSDT-EC.aml</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -20,7 +20,7 @@
 				<key>Path</key>
 				<string>SSDT-HPET.aml</string>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -67,6 +67,14 @@
 				<string>SMBus fixes</string>
 				<key>Path</key>
 				<string>SSDT-SBUS-MCHC.aml</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Fix key spam on lid close</string>
+				<key>Path</key>
+				<string>SSDT-HP-FixLidSleep.aml</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -235,7 +243,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>Find</key>
 				<data>U0JUTg==</data>
 				<key>Limit</key>
