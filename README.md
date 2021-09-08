@@ -96,7 +96,6 @@ Not included in this repo, I use the following kexts:
 
 - [AirportItlwm](https://github.com/OpenIntelWireless/itlwm): Driver for Intel wireless
 - [AppleALC](https://github.com/acidanthera/AppleALC): Used to get the onboard audio working
-- [CPUFriend](https://github.com/acidanthera/CPUFriend): Power management data injection
 - [ECEnabler](https://github.com/1Revenger1/ECEnabler): Battery status
 - [IntelMausi](https://github.com/acidanthera/IntelMausi): Driver for the built-in Ethernet controller
 - [Lilu](https://github.com/acidanthera/Lilu): Requirement for most other kexts in this list
