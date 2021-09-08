@@ -426,6 +426,8 @@
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>BgAmFg==</data>
+				<key>force-online</key>
+				<integer>1</integer>
 			</dict>
 		</dict>
 		<key>Delete</key>
