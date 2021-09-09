@@ -34,7 +34,7 @@ Settings not specified are left on their default values or are unimportant.
     - Video memory size: `64 MB`
     - [ ] Wake on USB
     - [x] VT-x
-    - [ ] VT-d -> Could be left on, since the DisableIOMapper quirk is enabled in OpenCore.
+    - [ ] VT-d
     - Deep sleep: `Off`
 - Built-In Device Options
     - [ ] Wireless Button State
@@ -44,22 +44,16 @@ Settings not specified are left on their default values or are unimportant.
     - [ ] Flash Media Reader -> Doesn't work anyway, see current issues below.
 
 # OpenCore config noteworthy things
-## TODO: UPDATE THIS
-
 - SIP is completely enabled
-- `ig-platform-id` is set to `0x0A260006` and the device-id is spoofed to `0x0412` for the HD 4400 to work like HD 4600.
 - The system is set to play the startup beep/bong on its internal speaker. Drop the Resources folder from [OcBinaryData](https://github.com/acidanthera/OcBinaryData) in your EFI/OC folder. Strip out the excess files for languages you don't use for faster bootup times.
-    - Lies! It doesn't currently do this. Keeping it here for future reference though.
 
 ## ScanPolicy enabled flags
-### TODO: UPDATE THIS
-ScanPolicy is set to a value of `2162947` or binary `001000010000000100000011`. This means the following flags are set:
+ScanPolicy is set to a value of `65795` or binary `000000010000000100000011`. This means the following flags are set:
 
 - `OC_SCAN_FILE_SYSTEM_LOCK` (bit 0)
 - `OC_SCAN_DEVICE_LOCK` (bit 1)
 - `OC_SCAN_ALLOW_FS_APFS` (bit 8)
 - `OC_SCAN_ALLOW_DEVICE_SATA` (bit 16)
-- `OC_SCAN_ALLOW_DEVICE_USB` (bit 21)
 
 Please refer to the OpenCore manual for the meaning of these flags. In short, these flags allow scanning of APFS partitions (for macOS) on SATA and USB drives only. The USB part should be temporary.
 
@@ -68,7 +62,8 @@ See the ACPI subfolder.
 
 - `BATC`: Combines both the built-in and external batteries together in one device
 - `BATM`: Overrides methods using both batteries which are renamed with ACPI patches
-- `EC-LAPTOP`: Provides a laptop EC device (TODO: Check if necessary/even working?)
+- `EC`: Provides a laptop EC device
+- `HP-FixLidSleep`: Does what it says on the tin. Mutes a sleep key event generated when the lid is closed, causing massive key spam before sleep
 - `HPET`: Fixes some conflicting IRQs. Works together with a couple ACPI patches defined in config.plist
 - `PLUG`: Sets `plugin-type` to 1, needed for AGPM and proper CPU power management.
 - `PNLF`: Backlight patches, copied from WhateverGreen
@@ -76,20 +71,19 @@ See the ACPI subfolder.
 - `XOSI`: Overrides the OSI method to enable more Windows-only features
 
 # Device Properties
-## TODO: Update this
-- `PciRoot(0x0)/Pci(0x1b,0x0)`: IDT 92HD91BXX
-    - `layout-id`: `84`, used to tell AppleALC which layout ID to pick to get the onboard sound working.
+- `PciRoot(0x0)/Pci(0x1b,0x0)`: Realtek ALC280
+    - `layout-id`: `3`, used to tell AppleALC which layout ID to pick to get the onboard sound working.
 - `PciRoot(0x0)/Pci(0x2,0x0)`: Intel HD Graphics 4400
-    - `ig-platform-id`: `0x0A260006` (reversed)
-- `PciRoot(0x0)/Pci(0x1c,0x3)/Pci(0x0,0x0)`: Broadcom BCM43224
-    - `brcmfx-country`: `NL` to make optimal use out of the Broadcom card and to reduce possible interference with surrounding devices.
+    - `ig-platform-id`: `0x16160002` (reversed)
+    - `force-online`: `0x00000001` (reversed)
+    - TODO: See if the recommended value of `0x16260006` works well?
 
 # Drivers
 Not included in this repo, I use the following drivers:
 
 - [AudioDxe](https://github.com/acidanthera/OpenCorePkg) TODO: Implement chime support
-- FwRuntimeServices (in the OpenCore package)
 - [HFSPlus](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
+- OpenRuntime (in the OpenCore package)
 
 # Kexts
 Not included in this repo, I use the following kexts:
