@@ -104,6 +104,13 @@ Not included in this repo, I use the following kexts:
 
 # Current issues
 
+## Battery status updates inconsistently
+Will have to review battery SSDT patches, or look into how ECEnabler handles these. It might be hooking onto a specific battery device that we're not emulating correctly.
+
+- Hotplugging a second battery is not supported.
+- Battery status does not update automatically.
+- When running on the primary battery and charging, the laptop will always display "Not charging" 
+
 ## Inconsistent black screen after lid open
 
 **Maybe fixed? CPUFriend with the included data provider seems to eliminate this issue. Leaving this here for reference or for when the issue decides to pop up again.**
