@@ -108,8 +108,139 @@ Not included in this repo, I use the following kexts:
 
 # Current issues
 
-## Inconsistent black screen after wake
+## Inconsistent black screen after lid open
 Sometimes the system wakes to a black screen, waking it again a few more times fixes the issue randomly.
+
+Observations:
+- External displays are not affected, although they sometimes fail to initialize as well.
+- It is not limited to sleep as originally thought
+- `force-online` property has no effect (neither does force-online-framebuffers with framebuffer 0)
+- `disable-agdc` property has no effect so AGDC isn't causing this(?)
+- Brightness keys give an invalid key sound effect when pressed in this state - maybe macOS assumes the display to be unavailable?
+- It seems to work better while plugged in to the AC adapter
+
+Logs with a failed attempt seem to repetitively indicate the following:
+
+```
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0 power state transition Doze --> Wake
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Lighting up display at index 0 in resume from sleep
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0: Complete modeset
+kernel: (AppleIntelBDWGraphicsFramebuffer) Clock recovery failed..
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping linearization as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0 power state transition complete
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 150270
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Setting display mode on index 0 1600 x 900 -> 0 x 0 encoded with 0x0  0 bpc with color 0 and range 0, Pixelclock = 119400000
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] CD Clock Reg value in the End = 0X4c000000
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 150352
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeDidChange notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping the flip as intended
+...repeats a couple times...
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping setting of gamma as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 150603
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x0, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 150689
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 150690
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 150690
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 150690
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 150690
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x0, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x0, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x0, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 151999
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAAWillEnterDefer notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 1->4
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 152097
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 152097
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAAWillEnterDefer notification received for fb 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 1->4
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 152097
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 152097
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAAWillEnterDefer notification received for fb 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 1->4
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 152097
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Blanking out the screen without black gamma
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] FB0: VBlank Timeout Timer called in 51ms - fTransactionState = 0x2, fLiveState = 0x0 fOnline: 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][ERROR  ] Path state is 2
+kernel: (AppleIntelBDWGraphicsFramebuffer) Reporting Fake VBL for pipe 0 on Fb 0
+```
+
+A successful attempt later down the line:
+```
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0 power state transition Doze --> Wake
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Lighting up display at index 0 in resume from sleep
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0: Complete modeset
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping linearization as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) FB0 power state transition complete
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 157984
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Setting display mode on index 0 1600 x 900 -> 0 x 0 encoded with 0x0  0 bpc with color 0 and range 0, Pixelclock = 119400000
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] CD Clock Reg value in the End = 0X4c000000
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 158038
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeDidChange notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping the flip as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping setting of gamma as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping the flip as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping setting of gamma as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping the flip as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Changes not allowed. Skipping setting of gamma as intended
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 158235
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 0 at time 158258
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 0
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 158258
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 1 at time 158258
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 158258
+kernel: (AppleIntelBDWGraphicsFramebuffer) [IGFB][INFO   ] Transitioning wsaa from 4->1
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyDisplayModeWillChange notification received on Fb 2 at time 158258
+kernel: (AppleIntelBDWGraphicsFramebuffer) kIOFBNotifyWSAADidExitDefer notification received for fb 2
+```
 
 ## SD card reader doesn't work
 ### TODO: UPDATE THIS FROM 840G1, not tested
