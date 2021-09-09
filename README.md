@@ -96,6 +96,8 @@ Not included in this repo, I use the following kexts:
 
 - [AirportItlwm](https://github.com/OpenIntelWireless/itlwm): Driver for Intel wireless
 - [AppleALC](https://github.com/acidanthera/AppleALC): Used to get the onboard audio working
+- [CPUFriend](https://github.com/acidanthera/CPUFriend): Used to fix CPU power management
+  - [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) is used to generate CPUFriendDataProvider.kext 
 - [ECEnabler](https://github.com/1Revenger1/ECEnabler): Battery status
 - [IntelMausi](https://github.com/acidanthera/IntelMausi): Driver for the built-in Ethernet controller
 - [Lilu](https://github.com/acidanthera/Lilu): Requirement for most other kexts in this list
@@ -109,6 +111,12 @@ Not included in this repo, I use the following kexts:
 # Current issues
 
 ## Inconsistent black screen after lid open
+
+**Maybe fixed? CPUFriend with the included data provider seems to eliminate this issue. Leaving this here for reference or for when the issue decides to pop up again.**
+One small issue is that you need to wake the screen twice after sleep (press Esc and then any key). But after this it seems to consistently work. No idea why.
+
+-----
+
 Sometimes the system wakes to a black screen, waking it again a few more times fixes the issue randomly.
 
 Observations:
