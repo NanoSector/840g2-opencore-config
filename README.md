@@ -74,9 +74,8 @@ See the ACPI subfolder.
 - `PciRoot(0x0)/Pci(0x1b,0x0)`: Realtek ALC280
     - `layout-id`: `3`, used to tell AppleALC which layout ID to pick to get the onboard sound working.
 - `PciRoot(0x0)/Pci(0x2,0x0)`: Intel HD Graphics 4400
-    - `ig-platform-id`: `0x16160002` (reversed)
+    - `ig-platform-id`: `0x16260006` (reversed)
     - `force-online`: `0x00000001` (reversed)
-    - TODO: See if the recommended value of `0x16260006` works well?
 
 # Drivers
 Not included in this repo, I use the following drivers:
@@ -114,7 +113,7 @@ Will have to review battery SSDT patches, or look into how ECEnabler handles the
 ## Inconsistent black screen after lid open
 
 **Maybe fixed? CPUFriend with the included data provider seems to eliminate this issue. Leaving this here for reference or for when the issue decides to pop up again.**
-One small issue is that you need to wake the screen twice after sleep (press Esc and then any key). But after this it seems to consistently work. No idea why.
+One small issue is that you need to sleep the system, wake it up and then wake the screen at least twice after sleep (press Esc and then any key). But after this it seems to consistently work. No idea why.
 
 -----
 
