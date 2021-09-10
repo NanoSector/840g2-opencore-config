@@ -1,12 +1,12 @@
-# 840g1-opencore-config
+# 840g2-opencore-config
 OpenCore configuration for my Elitebook.
 
-# OpenCore version tested with: 0.7.2
+# OpenCore version tested with: 0.7.3
 ## macOS version tested with: 11.5.2
 Please do not use this with any newer or older version as some options may no longer exist or be interpreted differently, or new options may be needed in order to successfully boot.
 
 # Specs
-- System: HP Elitebook 840 G2 (board id 198F)
+- System: HP Elitebook 840 G2
 - CPU: i5 5200U
 - GPU: Intel HD Graphics 5500
 - RAM: 16 GB Kingston 1600 MHz DDR3

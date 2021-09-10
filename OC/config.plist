@@ -1074,6 +1074,8 @@
 				<string>BootKicker.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1092,6 +1094,8 @@
 				<string>ChipTune.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1110,6 +1114,8 @@
 				<string>CleanNvram.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1128,6 +1134,8 @@
 				<string>ControlMsrE2.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1146,6 +1154,8 @@
 				<string>CsrUtil.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1164,6 +1174,8 @@
 				<string>GopStop.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1182,6 +1194,8 @@
 				<string>HdaCodecDump.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1200,6 +1214,8 @@
 				<string>KeyTester.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1218,6 +1234,8 @@
 				<string>MmapDump.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1236,6 +1254,8 @@
 				<string>OpenControl.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1254,6 +1274,8 @@
 				<string>OpenShell.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1272,6 +1294,8 @@
 				<string>ResetSystem.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1290,6 +1314,8 @@
 				<string>RtcRw.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1308,6 +1334,8 @@
 				<string>TpmInfo.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -1326,6 +1354,8 @@
 				<string>VerifyMsrE2.efi</string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Flavour</key>
+				<string>Auto</string>
 			</dict>
 		</array>
 	</dict>
@@ -1487,10 +1517,38 @@
 		<true/>
 		<key>Drivers</key>
 		<array>
-			<string>HfsPlus.efi</string>
-			<string>OpenRuntime.efi</string>
-			<string>OpenCanopy.efi</string>
-			<string>AudioDxe.efi</string>
+			<dict>
+				<key>Path</key>
+				<string>AudioDxe.efi</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Arguments</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>Path</key>
+				<string>HfsPlus.efi</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Arguments</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>Path</key>
+				<string>OpenCanopy.efi</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Arguments</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>Path</key>
+				<string>OpenRuntime.efi</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Arguments</key>
+				<string></string>
+			</dict>
 		</array>
 		<key>Input</key>
 		<dict>
@@ -1603,6 +1661,8 @@
 			<integer>0</integer>
 			<key>UnblockFsConnect</key>
 			<true/>
+			<key>ForceOcWriteFlash</key>
+			<false/>
 		</dict>
 		<key>ReservedMemory</key>
 		<array>
