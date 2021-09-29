@@ -1482,7 +1482,7 @@
 			<key>AudioSupport</key>
 			<true/>
 			<key>MinimumVolume</key>
-			<integer>70</integer>
+			<integer>50</integer>
 			<key>PlayChime</key>
 			<string>Enabled</string>
 			<key>ResetTrafficClass</key>
@@ -1490,7 +1490,7 @@
 			<key>SetupDelay</key>
 			<integer>0</integer>
 			<key>VolumeAmplifier</key>
-			<integer>143</integer>
+			<integer>100</integer>
 		</dict>
 		<key>ConnectDrivers</key>
 		<true/>
