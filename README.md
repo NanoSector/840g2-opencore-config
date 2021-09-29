@@ -11,7 +11,7 @@ Please do not use this with any newer or older version as some options may no lo
 - GPU: Intel HD Graphics 5500
 - RAM: 16 GB Kingston 1600 MHz DDR3
 - SSD: 256 GB Samsung 830
-- Wifi: Intel Advanced-AC 7265
+- Wifi: Fenvi Broadcom BCM94352Z
 - Ethernet: Intel I218LM
 - Audio: Realtek ALC280
 - Card reader: Realtek RTS5227
@@ -87,7 +87,6 @@ Not included in this repo, I use the following drivers:
 # Kexts
 Not included in this repo, I use the following kexts:
 
-- [AirportItlwm](https://github.com/OpenIntelWireless/itlwm): Driver for Intel wireless
 - [AppleALC](https://github.com/acidanthera/AppleALC): Used to get the onboard audio working
 - [CPUFriend](https://github.com/acidanthera/CPUFriend): Used to fix CPU power management
   - [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) is used to generate CPUFriendDataProvider.kext 
@@ -256,5 +255,4 @@ However, that project seems dead and I have not (yet) tested this driver.
 I don't care, it's better this way. Probably requires an ACPI patch to get working.
 
 ## Wireless button is always orange
-### TODO: CHECK ONCE BROADCOM CARD ARRIVES
 Minor "issue", not sure how I could fix this. Wifi works fine so I'm probably not going to bother.
