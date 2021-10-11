@@ -987,7 +987,7 @@
 			<key>ApplePanic</key>
 			<true/>
 			<key>DisableWatchDog</key>
-			<true/>
+			<false/>
 			<key>DisplayDelay</key>
 			<integer>0</integer>
 			<key>DisplayLevel</key>
@@ -1406,7 +1406,7 @@
 		<key>Generic</key>
 		<dict>
 			<key>AdviseFeatures</key>
-			<false/>
+			<true/>
 			<key>MaxBIOSVersion</key>
 			<false/>
 			<key>MLB</key>
@@ -1503,6 +1503,8 @@
 				<true/>
 				<key>Arguments</key>
 				<string></string>
+				<key>Comment</key>
+				<string>Used for audio playback on boot</string>
 			</dict>
 			<dict>
 				<key>Path</key>
@@ -1511,6 +1513,8 @@
 				<true/>
 				<key>Arguments</key>
 				<string></string>
+				<key>Comment</key>
+				<string>HFS+ filesystem driver</string>
 			</dict>
 			<dict>
 				<key>Path</key>
@@ -1519,6 +1523,8 @@
 				<true/>
 				<key>Arguments</key>
 				<string></string>
+				<key>Comment</key>
+				<string>GUI for OpenCore</string>
 			</dict>
 			<dict>
 				<key>Path</key>
@@ -1527,6 +1533,8 @@
 				<true/>
 				<key>Arguments</key>
 				<string></string>
+				<key>Comment</key>
+				<string>OpenCore EFI runtime</string>
 			</dict>
 		</array>
 		<key>Input</key>

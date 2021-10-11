@@ -1,8 +1,8 @@
 # 840g2-opencore-config
 OpenCore configuration for my Elitebook.
 
-# OpenCore version tested with: 0.7.3
-## macOS version tested with: 11.5.2
+# OpenCore version tested with: 0.7.4
+## macOS version tested with: 12.0 Beta 9
 Please do not use this with any newer or older version as some options may no longer exist or be interpreted differently, or new options may be needed in order to successfully boot.
 
 # Specs
